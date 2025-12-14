@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Project Scorer</title>
+</head>
+<body>
+    <h2>GitHub Repository Scorer</h2>
+
+    <form action="/analyze" method="post">
+        <input type="text" name="repo" placeholder="GitHub repo URL" required style="width:400px;">
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    {% if score %}
+    <hr>
+
+    <p><b>Score:</b> {{ score }} / 100</p>
+    <p><b>Confidence:</b> {{ confidence }}</p>
+    <p><b>Summary:</b> {{ summary }}</p>
+
+    <p><b>Score Breakdown:</b></p>
+    <ul>
+        {% for k, v in breakdown.items() %}
+        <li>{{ k }}: {{ v }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><b>Roadmap:</b></p>
+    <ul>
+        {% for item in roadmap %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+</body>
+</html>
